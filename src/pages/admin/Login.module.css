@@ -1,0 +1,178 @@
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.loginWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #160c35;
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.loginBox {
+    background: rgba(11, 4, 58, 0.95);
+  padding: 40px 40px 50px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 459px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.loginTitle {
+  margin-bottom: 5px;
+  font-size: 28px;
+  color: white;
+  font-weight: 700;
+}
+
+.loginSubtitle {
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: #666;
+  letter-spacing: 0.04em;
+}
+
+.errorMsg {
+  background: #ffdddd;
+  border: 1px solid #ff5c5c;
+  color: #b71c1c;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  user-select: none;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginInput {
+  padding: 14px 16px;
+  font-size: 16px;
+  margin-bottom: 22px;
+  border: 1.8px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+
+.loginInput:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 6px #764ba2aa;
+}
+
+.passwordWrapper {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.passwordInput {
+  padding-right: 45px;
+}
+
+.togglePasswordBtn {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 30px;
+  user-select: none;
+  padding: 0;
+  line-height: 1;
+  color: #764ba2;
+  transition: color 0.3s ease;
+}
+
+.togglePasswordBtn:hover {
+  color: #4b2a77;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: white;
+  margin-bottom: 30px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.rememberMe input[type='checkbox'] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1.5px solid black;
+  transition: border-color 0.3s ease;
+}
+
+.rememberMe input[type='checkbox']:checked {
+  background-color: #764ba2;
+  border-color: #764ba2;
+}
+
+.loginBtn {
+  padding: 16px 0;
+  font-size: 18px;
+  background-color: #764ba2;
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background-color 0.3s ease;
+}
+
+.loginBtn:hover {
+  background-color: #5a3677;
+}
+
+@media (max-width: 460px) {
+  .loginBox {
+    padding: 30px 20px 25px;
+  }
+
+  .loginTitle {
+    font-size: 24px;
+  }
+
+  .loginSubtitle {
+    font-size: 13px;
+  }
+
+  .loginInput {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+
+  .togglePasswordBtn {
+    font-size: 18px;
+  }
+
+  .loginBtn {
+    font-size: 16px;
+    padding: 14px 0;
+  }
+}

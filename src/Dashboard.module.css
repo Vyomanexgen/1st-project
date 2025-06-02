@@ -1,0 +1,205 @@
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #121212;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden; 
+}
+
+
+/* Header */
+.appHeader {
+  position: relative;
+  background-color: #1f1f1f;
+  padding: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  color: #00e5ff;
+}
+/* header buttons */
+
+
+.headerButtons {
+    display: flex;
+    gap: 12px;
+    position: absolute; 
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-wrap: nowrap; 
+    
+}
+
+
+.headerButton {
+    background-color: #00e5ff;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; 
+}
+
+.headerButton:hover {
+  border: 2px solid #00e5ff;
+  color: #fff; 
+  background: transparent;
+}
+
+/* Main Layout */
+.main {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  min-width: 200px;
+  background-color: #1f1f1f;
+  padding: 20px;
+  overflow-x: hidden;
+  border-right: 1px solid #333;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+ 
+  overflow-x: hidden;
+}
+
+
+.welcomeMessage {
+  text-align: center;
+  padding: 80px 20px;
+  margin: 160px auto;
+  border-radius: 16px;
+  max-width: 1000px;
+
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+.highlight {
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff;
+}
+
+/* Error display */
+.errorDisplay {
+  text-align: center;
+  margin-top: 80px;
+  font-size: 1.6rem;
+  color: #ff6b6b;
+  padding: 40px;
+  border-radius: 12px;
+  margin: 160px auto;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    overflow-x: scroll;
+    white-space: nowrap;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .welcome-message h1 {
+    font-size: 1rem;
+  }
+
+  .error-display {
+    font-size: 1.2rem;
+    padding: 20px;
+  }
+  h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+.errorDisplay{
+   font-size: 2rem;
+}
+
+.highlight {
+  color: #00e5ff;
+  text-shadow: 0 0 10px #00e5ff;
+}
+.headerButtons {
+        position: static; /* Remove absolute positioning on smaller screens */
+        transform: none; /* Reset transform */
+        width: 100%; /* Take full width */
+        justify-content: center; /* Center buttons horizontally */
+        padding: 10px 0; /* Add some vertical padding */
+        /* Optionally, move them below the title on very small screens */
+        flex-wrap: wrap; /* Allow buttons to wrap if necessary */
+    }
+
+    /* If you want them below the title, adjust the appHeader padding */
+    .appHeader {
+        padding: 20px; /* Base padding */
+        padding-bottom: 70px; /* Make space for buttons below */
+        display: flex; /* Use flexbox for the header content */
+        flex-direction: column; /* Stack title and buttons */
+        align-items: center; /* Center items */
+    }
+
+    .appHeader span {
+        margin-bottom: 10px; /* Space between title and buttons */
+    }
+
+}
+
+@media (max-width: 390px) {
+  .headerButton {
+        padding: 6px 12px; /* Slightly smaller padding for buttons */
+        font-size: 0.9rem; /* Reduce font size */
+    }
+    .headerButtons {
+        gap: 8px; /* Reduce gap between buttons */
+    }
+   h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+.errorDisplay{
+   font-size: 1.5rem;
+}
+}

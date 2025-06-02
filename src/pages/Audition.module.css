@@ -1,0 +1,244 @@
+.auditionSection {
+  padding: 40px;
+  background: var(--color-bg-primary);
+  font-family: var(--font-base);
+}
+
+.auditionHeader {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.logoText {
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: bold;
+  font-family: var(--font-header);
+  color: var(--color-text-light);
+}
+
+.auditionGrid {
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+  align-items: stretch;
+}
+
+@media (min-width: 1200px) {
+  .auditionGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .auditionGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .auditionGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .auditionGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.auditionCard {
+  width: 100%;
+  background-color: var(--color-secondary-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  text-align: center;
+}
+
+.auditionCard:hover {
+  transform: translateY(-5px);
+}
+
+.auditionImageContainer {
+  height: 140px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-hover);
+}
+
+.auditionImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auditionTitle {
+  font-size: clamp(14px, 2vw, 16px);
+  padding: 10px;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modalForm {
+  background-color: var(--color-surface-dark);
+  padding: 30px;
+  width: 90%;
+  max-width: 800px;
+  border-radius: var(--border-radius);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 20px var(--color-hover);
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--color-subtext);
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: var(--color-accent);
+}
+
+.modalForm h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: clamp(20px, 3vw, 28px);
+  font-family: var(--font-header);
+  color: var(--color-text-light);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+fieldset {
+  border: 1px solid var(--color-secondary-navbar);
+  border-radius: var(--border-radius);
+  padding: 20px;
+}
+
+legend {
+  padding: 0 10px;
+  font-weight: bold;
+  color: var(--color-text-light);
+}
+
+.modalForm input[type="text"],
+.modalForm input[type="email"],
+.modalForm input[type="tel"],
+.modalForm input[type="date"],
+.modalForm textarea {
+  width: 100%;
+  padding: var(--space-md);
+  border: 1px solid var(--color-secondary-navbar);
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 14px;
+  background-color: var(--color-secondary-bg);
+  font-family: var(--font-base);
+  color: var(--color-text-light);
+}
+
+.modalForm input[type="file"] {
+  width: 100%;
+  padding: var(--space-md);
+  border: 1px solid var(--color-secondary-navbar);
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 14px;
+  background-color: var(--color-secondary-bg);
+  color: var(--color-text-light);
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-style: italic;
+  opacity: 1;
+  color: var(--color-text-subtle);
+}
+
+textarea {
+  resize: vertical;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-top: var(--space-sm);
+  color: var(--color-text-light);
+}
+
+.modalForm button[type="submit"] {
+  padding: 12px;
+  font-size: 16px;
+  background-color: var(--color-accent);
+  color: var(--color-text-light);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.modalForm button[type="submit"]:hover {
+  background-color: var(--color-accent);
+}
+
+@media (max-width: 1200px) {
+  .modalForm {
+    padding: 25px;
+  }
+}
+@media (max-width: 992px) {
+  .modalForm {
+    width: 95%;
+    padding: 20px;
+  }
+}
+@media (max-width: 768px) {
+  .logoText {
+    font-size: 26px;
+  }
+  .auditionTitle {
+    font-size: 15px;
+  }
+}
+@media (max-width: 480px) {
+  .modalForm {
+    padding: 15px;
+  }
+  .closeButton {
+    top: 10px;
+    right: 12px;
+    font-size: 24px;
+  }
+  input,
+  textarea {
+    font-size: 13px;
+  }
+  button[type="submit"] {
+    font-size: 15px;
+  }
+}

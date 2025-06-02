@@ -1,0 +1,106 @@
+.filmSection {
+  max-width: 1200px;
+  margin: auto;
+  color: #fff;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.titleWrapper {
+  display: inline-block;
+  position: relative;
+  opacity: 0;
+  animation: slideFromTop 1s ease-out forwards;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+}
+
+@keyframes slideFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filmList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.filmCard {
+  background-color: black;
+  border-radius: 10px;
+  width: 480px;
+  height: 300px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.filmCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.poster {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+}
+
+.filmName {
+  font-size: 2.3rem;
+  font-weight: bold;
+}
+
+.first {
+  color: #09713a;
+}
+
+.middle {
+  color: white;
+}
+
+.last {
+  color: #f7720c;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 29px;
+  }
+
+  .filmCard {
+    width: 480px;
+    height: 300px;
+  }
+
+  .poster {
+    height: 320px;
+  }
+
+  .filmName {
+    font-size: 2.3rem;
+  }
+}

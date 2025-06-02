@@ -1,0 +1,43 @@
+.user-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  width: 158px;
+  margin: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.user-card:hover {
+  transform: scale(1.05);
+}
+
+.user-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
+
+.user-card h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #2f3542;
+}
+
+/* Responsive image and card */
+@media (max-width: 768px) {
+  .user-card {
+    width: 90%;
+    margin: 1rem auto;
+  }
+
+  .user-card img {
+    width: 150px;
+    height: 150px;
+  }
+}

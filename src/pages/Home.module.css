@@ -1,0 +1,219 @@
+.section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-light);
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: black;
+  overflow: hidden;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.slideWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: black;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slideText {
+  position: absolute;
+  bottom: 80px;
+  left: 5%;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  font-size: clamp(1.2rem, 2vw + 1rem, 2.5rem); /* Responsive font size */
+  font-weight: bold;
+  color: var(--color-text-light);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  z-index: 2;
+}
+
+.buttonsWrapper {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;      /* arrange buttons in a row */
+  flex-wrap: nowrap;        /* prevent wrapping to next line */
+  gap: clamp(8px, 1vw, 16px); /* responsive gap */
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  z-index: 2;
+}
+
+.fadeInLeft {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slideUp {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn {
+  padding: clamp(8px, 1vw + 6px, 14px) clamp(16px, 2vw + 16px, 30px);
+  font-size: clamp(0.8rem, 1vw + 0.5rem, 1.1rem); /* responsive font */
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btnPrimary {
+  background-color: var(--color-accent);
+  color: #ffff;
+}
+
+.btnPrimary:hover {
+  border: 2px solid var(--color-accent);
+}
+
+.btnOutline {
+  background-color: transparent;
+  border: 2px solid var(--color-accent);
+  color: #ffff;
+  text-decoration: none;
+}
+
+.btnOutline:hover {
+  background-color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  color: white;
+}
+
+.introVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.fadeInLeft,
+.slideUp {
+  left: 50% !important;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.fadeOut {
+  opacity: 0 !important;
+  transform: translateX(-50%) translateY(20px); /* slight downward movement */
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  left: 50% !important; /* keep centered */
+}
+
+/* Responsive adjustments for smaller devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .slideText {
+    bottom: 80px;
+    font-size: clamp(1rem, 1.5vw + 0.8rem, 1.8rem);
+  }
+
+  .buttonsWrapper {
+    gap: clamp(6px, 1vw, 12px);
+  }
+
+  .btn {
+    padding: clamp(6.5px, 1vw + 5px, 12px) clamp(12px, 2vw + 14px, 24px);
+    font-size: clamp(0.7rem, 1vw + 0.4rem, 1.1rem);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .slideText {
+    bottom: 70px;
+    font-size: clamp(0.8rem, 1.5vw + 0.5rem, 1.3rem);
+  }
+
+  .buttonsWrapper {
+    gap: clamp(5px, 1vw, 10px);
+  }
+
+  .btn {
+    padding: clamp(6px, 1vw + 4px, 10px) clamp(12px, 2vw + 12px, 20px);
+    font-size: clamp(0.6rem, 1vw + 0.3rem, 0.9rem);
+  }
+}
+
+@media (min-width: 321px) and (max-width: 480px) {
+  .slideText {
+    bottom: 60px;
+    font-size: clamp(0.8rem, 1.5vw + 0.5rem, 1.3rem);
+  }
+
+  .buttonsWrapper {
+    gap: clamp(4px, 1vw, 8px);
+  }
+
+  .btn {
+    padding: clamp(5px, 1vw + 3px, 8px) clamp(10px, 2vw + 10px, 16px);
+    font-size: clamp(0.6rem, 1vw + 0.25rem, 0.85rem);
+  }
+}
+
+@media (max-width: 320px) {
+  .slideText {
+    bottom: 50px;
+    font-size: clamp(0.7rem, 1.5vw + 0.5rem, 1.4rem);
+  }
+
+  .buttonsWrapper {
+    gap: clamp(3px, 1vw, 6px);
+  }
+
+  .btn {
+    padding: clamp(4px, 1vw + 2px, 6px) clamp(8px, 2vw + 8px, 14px);
+    font-size: clamp(0.55rem, 1vw + 0.2rem, 0.75rem);
+  }
+  .introVideo {
+    width: 100vw;
+    height: 100vh;
+    object-fit: fill;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+}
