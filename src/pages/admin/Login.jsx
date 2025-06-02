@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import eyeOpen from './images/images.png';
 import eyeOff from './images/clodedeye.png';
 import { useNavigate } from 'react-router-dom';
-import styles from './Login.module.css'; // Corrected for CSS Modules
-
+import styles from './Login.module.css'; 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
