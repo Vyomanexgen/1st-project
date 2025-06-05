@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Menu } from "lucide-react";
 import styles from "./Navbar.module.css";
-import { Link, useLocation } from "react-router-dom"; // <-- Import useLocation
+import { Link, useLocation } from "react-router-dom"; 
 import { HashLink } from 'react-router-hash-link';
 
 const sections = [
@@ -20,7 +20,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef(null);
-  const location = useLocation(); // <-- Get location object
+  const location = useLocation(); 
 
   const { scrollY } = useScroll();
   const navBackground = useTransform(
@@ -91,7 +91,7 @@ const Navbar = () => {
         damping: 24,
       }}
     >
-      <Link to="/admin" target="_blank" className={styles.brand}>
+      <Link to="/admin" target="_blank"  className={styles.brand}>
         <img
           src="/images/clapboard.png"
           alt="Clapboard"

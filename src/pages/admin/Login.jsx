@@ -66,7 +66,7 @@ const Login = ({ onLogin }) => {
               <img
                 src={showPassword ? eyeOpen : eyeOff}
                 alt={showPassword ? 'Hide password' : 'Show password'}
-                style={{ width: '32px', height: '32px', pointerEvents: 'none', marginTop:'-50px', userSelect: 'none',
+                style={{ width: '28px', height: '28px', pointerEvents: 'none', marginTop:'-50px', userSelect: 'none',
     transition: 'none',
     filter: 'none' }}
 

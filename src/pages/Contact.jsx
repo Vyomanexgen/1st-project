@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './Contact.module.css';
 import { FaEnvelope } from 'react-icons/fa';
+import { FaClock } from "react-icons/fa";
 
 const Contact = () => {
   const sectionRef = useRef();
@@ -98,7 +99,9 @@ console.log("ENV URL:", process.env.REACT_APP_BACKEND_URL);
             <FaEnvelope className={styles.icon} aria-label="Press Email" />
             directoravr92@gmail.com
           </p>
-          <p>Mon–Fri, 9am–5pm</p>
+          <p>
+           <FaClock className={styles.icon} aria-label="Time" />
+            Mon–Fri, 9am–5pm</p>
         </div>
       </div>
     </section>

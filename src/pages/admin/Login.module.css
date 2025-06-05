@@ -85,7 +85,7 @@
 
 .passwordInput {
   padding-right: 45px;
-   width: 90%; /* <-- add this to ensure it takes full width */
+   width: 90%; 
   box-sizing: border-box; 
 }
 
