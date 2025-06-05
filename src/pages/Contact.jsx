@@ -106,4 +106,4 @@ console.log("ENV URL:", process.env.REACT_APP_BACKEND_URL);
 };
 
 export default Contact;
-//     console.log("Form data:", formData);
+

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import eyeOpen from './images/images.png';
-import eyeOff from './images/clodedeye.png';
+import eyeOpen from './images/eye.png';
+import eyeOff from './images/eye-close.png';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css'; 
 const Login = ({ onLogin }) => {
@@ -31,7 +31,7 @@ const Login = ({ onLogin }) => {
     <div className={styles.loginWrapper}>
       <div className={styles.loginBox}>
         <h2 className={styles.loginTitle}>Welcome Back</h2>
-        <p className={styles.loginSubtitle}>Please sign in to your account</p>
+        <p className={styles.loginSubtitle}>AVR, Please sign in to your account</p>
 
         {error && <div className={styles.errorMsg}>{error}</div>}
 
