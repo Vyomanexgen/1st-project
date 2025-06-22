@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import eyeOpen from './images/images.png';
-import eyeOff from './images/clodedeye.png';
+import eyeOpen from './images/eye.png';
+import eyeOff from './images/eye-close.png';
 import { useNavigate } from 'react-router-dom';
-import styles from './Login.module.css'; // Corrected for CSS Modules
-
+import styles from './Login.module.css'; 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +31,7 @@ const Login = ({ onLogin }) => {
     <div className={styles.loginWrapper}>
       <div className={styles.loginBox}>
         <h2 className={styles.loginTitle}>Welcome Back</h2>
-        <p className={styles.loginSubtitle}>Please sign in to your account</p>
+        <p className={styles.loginSubtitle}>AVR, Please sign in to your account</p>
 
         {error && <div className={styles.errorMsg}>{error}</div>}
 
@@ -67,7 +66,7 @@ const Login = ({ onLogin }) => {
               <img
                 src={showPassword ? eyeOpen : eyeOff}
                 alt={showPassword ? 'Hide password' : 'Show password'}
-                style={{ width: '32px', height: '32px', pointerEvents: 'none', marginTop:'-50px', userSelect: 'none',
+                style={{ width: '28px', height: '28px', pointerEvents: 'none', marginTop:'-50px', userSelect: 'none',
     transition: 'none',
     filter: 'none' }}
 

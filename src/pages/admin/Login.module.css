@@ -85,11 +85,13 @@
 
 .passwordInput {
   padding-right: 45px;
+   width: 90%; 
+  box-sizing: border-box; 
 }
 
 .togglePasswordBtn {
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: 12px;
   transform: translateY(-50%);
   border: none;
@@ -100,9 +102,15 @@
   padding: 0;
   line-height: 1;
   color: #764ba2;
+  outline: none;
   transition: color 0.3s ease;
+  width: 20%;
 }
-
+.togglePasswordBtn:focus,
+.togglePasswordBtn:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
 .togglePasswordBtn:hover {
   color: #4b2a77;
 }
@@ -168,11 +176,17 @@
   }
 
   .togglePasswordBtn {
-    font-size: 18px;
+    font-size: 20px; /* was 18px, slightly increased but still fits */
+    right: 10px; /* slightly adjust positioning if needed */
   }
 
   .loginBtn {
     font-size: 16px;
     padding: 14px 0;
   }
+}
+.loginFooter {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
 }

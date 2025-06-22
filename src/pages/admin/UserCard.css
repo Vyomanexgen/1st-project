@@ -29,7 +29,7 @@
   color: #2f3542;
 }
 
-/* Responsive image and card */
+
 @media (max-width: 768px) {
   .user-card {
     width: 90%;
