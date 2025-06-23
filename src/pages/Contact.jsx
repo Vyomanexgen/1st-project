@@ -27,6 +27,7 @@ console.log("ENV URL:", process.env.REACT_APP_BACKEND_URL);
     const formData = {
       name: e.target.name.value,
       email: e.target.email.value,
+      phone: e.target.phone.value,
       subject: e.target.subject.value,
       message: e.target.message.value,
     };
@@ -55,6 +56,26 @@ console.log("ENV URL:", process.env.REACT_APP_BACKEND_URL);
     }
   };
 
+  const validateForm = (form) => {
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name || !email || !phone || !subject || !message) {
+      alert('Please fill in all fields.');
+      return false;
+    }
+
+    if (!/^\d{10}$/.test(phone)) {
+      alert('Phone number must be exactly 10 digits.');
+      return false;
+    }
+
+    return true;
+  };
+
   return (
     <section
       id="contact"
@@ -64,7 +85,14 @@ console.log("ENV URL:", process.env.REACT_APP_BACKEND_URL);
       <h2 className={styles.sectionTitle}>Get in Touch</h2>
 
       <div className={styles.contactContainer}>
-        <form className={styles.contactForm} onSubmit={handleSubmit}>
+        <form
+          className={styles.contactForm}
+          onSubmit={async (e) => {
+            e.preventDefault();
+            if (!validateForm(e.target)) return;
+            await handleSubmit(e);
+          }}
+        >
           <h3 className={styles.contactHeading}>Send a Message</h3>
 
           <label htmlFor="name">Name</label>
@@ -72,6 +100,9 @@ console.log("ENV URL:", process.env.REACT_APP_BACKEND_URL);
 
           <label htmlFor="email">Email</label>
           <input id="email" name="email" type="email" placeholder="Your Email" required />
+
+          <label htmlFor="phone">Phone Number</label>
+          <input id="phone" name="phone" type="tel" placeholder="Your Phone Number" required />
 
           <label htmlFor="subject">Subject</label>
           <select id="subject" name="subject" required>

@@ -42,11 +42,20 @@ const Footer = () => {
       <div className="footer-left">
         © {new Date().getFullYear()} Director AVR. All rights reserved.
       </div>
-      <div className="footer-right">
-        Design & Dev
-        <DiamondBulletIcon />
-        <span className="company-name"> VyomaNexGen Services</span>
-      </div>
+    <div className="footer-right">
+  Design & Dev
+  <DiamondBulletIcon />
+  <a
+    href="https://www.vyomanexgen.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="company-name"
+    style={{ color: '#00aaff', textDecoration: 'none' ,fontweight: 600}}
+  >
+    VyomaNexGen Services
+  </a>
+</div>
+
     </footer>
   );
 };
