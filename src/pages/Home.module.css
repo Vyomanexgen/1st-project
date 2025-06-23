@@ -15,17 +15,27 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: black;
+  background-color: var(--color-bg-primary);
   overflow: hidden;
 }
 
-.swiper {
+.media16x9 {
   width: 100%;
   height: 100%;
+  background-color: var(--color-bg-primary);
 }
 
-.slideWrapper {
-  position: relative;
+.introVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.swiper {
   width: 100%;
   height: 100%;
 }
@@ -39,7 +49,7 @@
   top: 0;
   left: 0;
   z-index: 1;
-  background-color: black;
+  background-color: var(--color-bg-primary);
   transition: opacity 0.5s ease-in-out;
 }
 
@@ -50,7 +60,7 @@
   transform: translateX(-50%);
   width: 90%;
   text-align: center;
-  font-size: clamp(1.2rem, 2vw + 1rem, 2.5rem); /* Responsive font size */
+  font-size: clamp(1.2rem, 2vw + 1rem, 2.5rem);
   font-weight: bold;
   color: var(--color-text-light);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
@@ -65,9 +75,9 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  flex-direction: row;      /* arrange buttons in a row */
-  flex-wrap: nowrap;        /* prevent wrapping to next line */
-  gap: clamp(8px, 1vw, 16px); /* responsive gap */
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: clamp(8px, 1vw, 16px);
   justify-content: center;
   align-items: center;
   opacity: 0;
@@ -87,7 +97,7 @@
 
 .btn {
   padding: clamp(8px, 1vw + 6px, 14px) clamp(16px, 2vw + 16px, 30px);
-  font-size: clamp(0.8rem, 1vw + 0.5rem, 1.1rem); /* responsive font */
+  font-size: clamp(0.8rem, 1vw + 0.5rem, 1.1rem);
   font-weight: 600;
   border: none;
   border-radius: var(--border-radius);
@@ -119,16 +129,6 @@
   color: white;
 }
 
-.introVideo {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
 .fadeInLeft,
 .slideUp {
   left: 50% !important;
@@ -139,12 +139,12 @@
 
 .fadeOut {
   opacity: 0 !important;
-  transform: translateX(-50%) translateY(20px); /* slight downward movement */
+  transform: translateX(-50%) translateY(20px);
   transition: opacity 0.9s ease, transform 0.9s ease;
-  left: 50% !important; /* keep centered */
+  left: 50% !important;
 }
 
-/* Responsive adjustments for smaller devices */
+/* Responsive adjustments */
 @media (min-width: 769px) and (max-width: 1024px) {
   .slideText {
     bottom: 80px;
@@ -207,13 +207,8 @@
     padding: clamp(4px, 1vw + 2px, 6px) clamp(8px, 2vw + 8px, 14px);
     font-size: clamp(0.55rem, 1vw + 0.2rem, 0.75rem);
   }
+
   .introVideo {
-    width: 100vw;
-    height: 100vh;
-    object-fit: fill;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
+    object-fit: contain;
   }
 }
