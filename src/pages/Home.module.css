@@ -144,6 +144,10 @@
   left: 50% !important;
 }
 
+
+
+
+
 /* Responsive adjustments */
 @media (min-width: 769px) and (max-width: 1024px) {
   .slideText {
@@ -170,10 +174,16 @@
   .buttonsWrapper {
     gap: clamp(5px, 1vw, 10px);
   }
+  .section{
+    height: 90vh;
+  }
 
   .btn {
     padding: clamp(6px, 1vw + 4px, 10px) clamp(12px, 2vw + 12px, 20px);
     font-size: clamp(0.6rem, 1vw + 0.3rem, 0.9rem);
+  }
+  .container{
+    transform: translatey(-60px);
   }
 }
 
@@ -181,6 +191,9 @@
   .slideText {
     bottom: 60px;
     font-size: clamp(0.8rem, 1.5vw + 0.5rem, 1.3rem);
+  }
+  .section{
+    height: 70vh;
   }
 
   .buttonsWrapper {
@@ -190,6 +203,11 @@
   .btn {
     padding: clamp(5px, 1vw + 3px, 8px) clamp(10px, 2vw + 10px, 16px);
     font-size: clamp(0.6rem, 1vw + 0.25rem, 0.85rem);
+  }
+  .container {
+    transform: translateY(-120px);
+    margin-bottom: -40px;
+    height: 600px;
   }
 }
 
