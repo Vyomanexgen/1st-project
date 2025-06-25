@@ -5,7 +5,7 @@ import UserCard from './pages/admin/UserCard';
 import UserDetail from './pages/admin/UserDetail';
 import styles from './Dashboard.module.css'; 
 import { useNavigate } from 'react-router-dom';
-
+import supabase from './config/supabaseClient';
 
 const Dashboard = ({ onLogout }) => {
   const [selectedRole, setSelectedRole] = useState('Home');
@@ -14,7 +14,7 @@ const Dashboard = ({ onLogout }) => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const navigate = useNavigate();
-
+console.log(supabase);
   useEffect(() => {
     if (selectedRole === 'Home') return;
 
