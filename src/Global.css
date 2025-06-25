@@ -7,8 +7,6 @@
   scroll-behavior: smooth;
 }
 
-
-
 html {
   font-size: 18px;
   -webkit-overflow-scrolling: touch;
@@ -20,7 +18,7 @@ html {
 }
 
 :root {
-  --color-bg-primary: #1c1c1e;
+  --color-bg-primary: #1c1c1e; /* Charcoal dark background */
   --color-bg-navbar: #2c2c2e;
   --color-text-light: #f5f5f7;
   --color-accent: #e63946;
@@ -126,15 +124,4 @@ p {
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-bg-primary: #82e1e4;
-    --color-bg-navbar: #f5f5f7;
-    --color-text-light: #1c1c1e;
-    --color-subtext: #555;
-  }
-  body {
-    background: var(--color-bg-primary);
-    color: var(--color-text-light);
-  }
-}
+/* ❌ Removed light mode override completely */
