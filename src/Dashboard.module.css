@@ -109,12 +109,60 @@ h1 {
   border-radius: 12px;
   margin: 160px auto;
 }
-
-.user-list {
+/* .user-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 20px;
+} */
+
+/* .userList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: flex-start;
+  padding: 20px;
+} */
+
+.userList{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row on large screens */
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+}
+.photoGroup {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.photoItem {
+  text-align: center;
+}
+
+.photoLabel {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+
+@media (max-width: 768px) {
+  .userList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .userList {
+    grid-template-columns: 2fr;
+  }
 }
 
 

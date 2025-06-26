@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Sidebar from './pages/admin/Sidebar';
 import UserCard from './pages/admin/UserCard';
 import UserDetail from './pages/admin/UserDetail';
 import styles from './Dashboard.module.css'; 
 import { useNavigate } from 'react-router-dom';
 import supabase from './config/supabaseClient';
+import { List } from 'lucide-react';
 
 const Dashboard = ({ onLogout }) => {
   const [selectedRole, setSelectedRole] = useState('Home');
@@ -14,33 +14,43 @@ const Dashboard = ({ onLogout }) => {
   const [errorMsg, setErrorMsg] = useState('');
 
   const navigate = useNavigate();
-console.log(supabase);
+
   useEffect(() => {
     if (selectedRole === 'Home') return;
 
-    axios
-      .get(`http://localhost:8080/api/users/role/${selectedRole}`)
-      .then((response) => {
-        if (Array.isArray(response.data) && response.data.length > 0) {
-          setUsers(response.data);
-          setErrorMsg('');
-        } else {
-          setUsers([]);
-          setErrorMsg('No records found for this role.');
-        }
-        setSelectedUser(null);
-      })
-      .catch((error) => {
-        console.error('Error fetching users:', error);
+    const fetchUsers = async () => {
+      const trimmedRole = selectedRole.toLowerCase().trim();
+        
+
+      const { data, error } = await supabase
+        .from('Audition Form')
+        .select('*')
+        .ilike('special_skills', `%${trimmedRole}%`);
+        console.log('🌐 All records:', data);
+       
+      if (error) {
+        console.error('❌ Supabase fetch error:', error);
         setUsers([]);
-        setErrorMsg('Failed to fetch data from backend.');
-      });
+        setErrorMsg('Failed to fetch data from Supabase.');
+      } else if (!data || data.length === 0) {
+        setUsers([]);
+        setErrorMsg('No records found for this role.');
+        console.warn('⚠️ No data found for role:', trimmedRole);
+      } else {
+        
+        setUsers(data);
+        setErrorMsg('');
+
+        
+      }
+
+      setSelectedUser(null);
+    };
+
+    fetchUsers();
   }, [selectedRole]);
 
- 
-
   const handleLogout = () => {
-    console.log("Logging out...");
     onLogout(); 
     navigate('/admin', { replace: true }); 
   };
@@ -49,12 +59,29 @@ console.log(supabase);
     window.location.href = '/#home';
   };
 
+useEffect(() => {
+  const fetchAllRecords = async () => {
+    const { data, error } = await supabase
+      .from('Audition Form')
+      .select('*');
+
+    if (error) {
+      console.error('Error fetching all records:', error);
+    } else {
+      console.log('✅ Total Records:', data.length);
+      console.log('📋 First Record Fields:', Object.keys(data[0] || {}));
+    }
+  };
+  fetchAllRecords();
+}, []);
+
+
+
   return (
     <div className={styles.appContainer}>
       <div className={styles.appHeader}>
         <span>AVR Dashboard</span>
         <div className={styles.headerButtons}>
-         
           <button className={styles.headerButton} onClick={handleLogout}>Logout</button>
           <button className={styles.headerButton} onClick={goToHome}>Home</button>
         </div>
@@ -73,15 +100,15 @@ console.log(supabase);
               </h1>
             </div>
           ) : selectedUser ? (
-            <UserDetail user={selectedUser} />
+            <UserDetail user={selectedUser} onBack={() => setSelectedUser(null)}/>
           ) : errorMsg ? (
             <div className={styles.errorDisplay}>{errorMsg}</div>
           ) : (
-            <div className={styles.userList}>
-              {users.map((user) => (
-                <UserCard key={user.id} user={user} onSelect={setSelectedUser} />
-              ))}
-            </div>
+           <div className={styles.userList}>
+  {users.map((user) => (
+    <UserCard key={user.id} user={user} onSelect={setSelectedUser} />
+  ))}
+</div>
           )}
         </div>
       </div>
@@ -90,4 +117,3 @@ console.log(supabase);
 };
 
 export default Dashboard;
-

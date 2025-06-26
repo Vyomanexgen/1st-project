@@ -83,7 +83,6 @@
 
   padding: var(--space-lg);
   border-radius: var(--border-radius);
- 
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
@@ -210,8 +209,15 @@
   transition: width 0.3s ease;
 }
 
-.socialLinkItem:hover::after {
+.socialLinkItem:hover::after,
+.socialLinkItem:focus::after {
   width: 100%;
+}
+
+.socialLinkItem:focus {
+  
+  outline: none;
+  
 }
 
 .socialLinkItem:hover .socialIcon {
