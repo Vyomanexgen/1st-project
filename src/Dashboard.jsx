@@ -25,9 +25,10 @@ const Dashboard = ({ onLogout }) => {
       const { data, error } = await supabase
         .from('Audition Form')
         .select('*')
-        .ilike('special_skills', `%${trimmedRole}%`);
+        .ilike('Categories', `%${trimmedRole}%`);
         console.log('🌐 All records:', data);
-       
+       console.log(`✅ ${data.length} users fetched for category: ${trimmedRole}`);
+
       if (error) {
         console.error('❌ Supabase fetch error:', error);
         setUsers([]);
