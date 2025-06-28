@@ -61,6 +61,7 @@ const UserDetail = ({ user, onBack }) => {
           <p><strong>Height / Weight:</strong> {user.height} cm / {user.weight} kg</p>
           <p><strong>Hair / Eye Color:</strong> {user.hair_colour} / {user.eye_colour}</p>
           <p><strong>Ethnicity:</strong> {user.ethnicity}</p>
+          <p><strong>Special_skills:</strong>{user.special_skills}</p>
             </div>
 
             <div className={styles.detailBlock}>
