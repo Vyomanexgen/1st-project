@@ -49,19 +49,38 @@ const UserDetail = ({ user, onBack }) => {
           <div className={styles.detailSections}>
             <div className={styles.detailBlock}>
           <h3>Personal Information</h3>
+         <p><strong>Unique ID:</strong> {user.unique_id || 'N/A'}</p>
+          <p><strong>Apply For:</strong> {user.Categories || 'N/A'}</p>
           <p><strong>Email:</strong> {user.email}</p>
           <p><strong>Phone:</strong> {user.phone_number}</p>
           <p><strong>Address:</strong> {user.address}</p>
-          <p><strong>Date of Birth:</strong> {user.date_of_birth}</p>
-          <p><strong>Gender:</strong> {user.gender}</p>
+          <p><strong>Date of Birth(YYYY/MM/DD):</strong> {user.date_of_birth}</p>
+         
             </div>
 
             <div className={styles.detailBlock}>
           <h3>Physical Attributes</h3>
+           <p><strong>Gender:</strong> {user.gender}</p>
           <p><strong>Height / Weight:</strong> {user.height} cm / {user.weight} kg</p>
           <p><strong>Hair / Eye Color:</strong> {user.hair_colour} / {user.eye_colour}</p>
           <p><strong>Ethnicity:</strong> {user.ethnicity}</p>
           <p><strong>Special_skills:</strong>{user.special_skills}</p>
+          <p>
+  <strong>Resume:</strong>{" "}
+  {user.resume ? (
+    <a
+      href={user.resume}
+      download
+      className={styles.resumeLink}
+      target="_blank"
+  rel="noopener noreferrer"
+    >
+      Download Resume 
+    </a>
+  ) : (
+    "N/A"
+  )}
+</p>
             </div>
 
             <div className={styles.detailBlock}>
