@@ -215,7 +215,9 @@ const Dashboard = ({ onLogout }) => {
              onChange={(e) => setSearchTerm(e.target.value)}
               className={styles.searchInput}
                 />
-              <button className={styles.searchButton}>🔍</button>
+             <button className={styles.searchButton}>
+  <img src="/images/search.png" alt="Search" className={styles.searchIcon} />
+</button>
             </div>
 
 
