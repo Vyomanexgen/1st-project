@@ -18,7 +18,7 @@ html {
 }
 
 :root {
-  --color-bg-primary: #1c1c1e; /* Charcoal dark background */
+  --color-bg-primary: #1c1c1e; 
   --color-bg-navbar: #2c2c2e;
   --color-text-light: #f5f5f7;
   --color-accent: #e63946;

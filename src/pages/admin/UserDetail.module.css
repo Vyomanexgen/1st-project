@@ -158,7 +158,7 @@ h2 {
   color: #ffd966;
 
 }
-/* 📱 Responsive (stacked layout for mobile) */
+
 @media (max-width: 992px) {
   .detailSections {
     grid-template-columns: repeat(2, 1fr);

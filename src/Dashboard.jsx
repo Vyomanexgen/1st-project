@@ -1,158 +1,55 @@
-// import React, { useState, useEffect } from 'react';
-// import Sidebar from './pages/admin/Sidebar';
-// import UserCard from './pages/admin/UserCard';
-// import UserDetail from './pages/admin/UserDetail';
-// import styles from './Dashboard.module.css';
-// import { useNavigate } from 'react-router-dom';
-// import supabase from './config/supabaseClient';
-
-// const Dashboard = ({ onLogout }) => {
-//   const [selectedRole, setSelectedRole] = useState('Home');
-//   const [users, setUsers] = useState([]);
-//   const [selectedUser, setSelectedUser] = useState(null);
-//   const [errorMsg, setErrorMsg] = useState('');
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (selectedRole === 'Home') return;
-
-//     const fetchUsers = async () => {
-//       const trimmedRole = selectedRole.toLowerCase().trim();
-
-//       const { data, error } = await supabase
-//         .from('Audition Form')
-//         .select('*')
-//         .ilike('Categories', `%${trimmedRole}%`);
-
-//       if (error) {
-//         console.error('❌ Supabase fetch error:', error);
-//         setUsers([]);
-//         setErrorMsg('Failed to fetch data from Supabase.');
-//       } else if (!data || data.length === 0) {
-//         setUsers([]);
-//         setErrorMsg('No records found for this role.');
-//         console.warn('⚠️ No data found for role:', trimmedRole);
-//       } else {
-//         console.log('🌐 All records:', data);
-//         console.log(`✅ ${data.length} users fetched for category: ${trimmedRole}`);
-//         setUsers(data);
-//         setErrorMsg('');
-//       }
-
-//       setSelectedUser(null);
-//     };
-
-//     fetchUsers();
-//   }, [selectedRole]);
-
-//   const handleLogout = () => {
-//     onLogout();
-//     navigate('/admin', { replace: true });
-//   };
-
-//   const goToHome = () => {
-//     window.location.href = '/#home';
-//   };
-
-//   useEffect(() => {
-//     const fetchAllRecords = async () => {
-//       const { data, error } = await supabase
-//         .from('Audition Form')
-//         .select('*');
-
-//       if (error) {
-//         console.error('Error fetching all records:', error);
-//       } else {
-//         console.log('✅ Total Records:', data.length);
-//         console.log('📋 First Record Fields:', Object.keys(data[0] || {}));
-//       }
-//     };
-//     fetchAllRecords();
-//   }, []);
-
-//   return (
-//     <div className={styles.appContainer}>
-//       <div className={styles.appHeader}>
-//         <span>AVR Dashboard</span>
-//         <div className={styles.headerButtons}>
-//           <button className={styles.headerButton} onClick={handleLogout}>Logout</button>
-//           <button className={styles.headerButton} onClick={goToHome}>Home</button>
-//         </div>
-//       </div>
-
-//       <div className={styles.main}>
-//         <div className={styles.sidebar}>
-//           <Sidebar onRoleSelect={setSelectedRole} selectedRole={selectedRole} />
-//         </div>
-//         <div className={styles.content}>
-//           {selectedRole === 'Home' ? (
-//             <div className={styles.welcomeMessage}>
-//               <h1>Hello, Welcome Back</h1>
-//               <h1>
-//                 MR <span className={styles.highlight}>A.VEERA RAGAVAN</span>
-//               </h1>
-//             </div>
-//           ) : selectedUser ? (
-//             <UserDetail user={selectedUser} onBack={() => setSelectedUser(null)} />
-//           ) : errorMsg ? (
-//             <div className={styles.errorDisplay}>{errorMsg}</div>
-//           ) : (
-//             <div className={styles.userList}>
-//               {users.map((user) => (
-//                 <UserCard key={user.id} user={user} onSelect={setSelectedUser} />
-//               ))}
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
 import React, { useState, useEffect } from 'react';
 import Sidebar from './pages/admin/Sidebar';
 import UserCard from './pages/admin/UserCard';
 import UserDetail from './pages/admin/UserDetail';
-import styles from './Dashboard.module.css';
+import styles from './Dashboard.module.css'; 
 import { useNavigate } from 'react-router-dom';
 import supabase from './config/supabaseClient';
+import ControlPanel from './pages/admin/ControlPanel';
 
 const Dashboard = ({ onLogout }) => {
   const [selectedRole, setSelectedRole] = useState('Home');
   const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]); // For search filter
   const [selectedUser, setSelectedUser] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [formOpen, setFormOpen] = useState(true);
+  const [sectionStatus, setSectionStatus] = useState([]);
+  
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (selectedRole === 'Home') return;
+    const fetchSubmissionData = async () => {
+      const { data: submissions } = await supabase.from('Audition Form').select('id');
+      if (submissions) setSubmissionCount(submissions.length);
+
+      const { data: statusData } = await supabase
+        .from('audition_form_status')
+        .select('is_open')
+        .eq('id', 1)
+        .single();
+
+      if (statusData) setFormOpen(statusData.is_open);
+    };
+
+    fetchSubmissionData();
+  }, []);
+
+  useEffect(() => {
+    if (selectedRole === 'Home' || selectedRole === 'Control') return;
 
     const fetchUsers = async () => {
-      const trimmedRole = selectedRole.toLowerCase().trim();
-
       const { data, error } = await supabase
         .from('Audition Form')
         .select('*')
-        .ilike('Categories', `%${trimmedRole}%`);
+        .ilike('Categories', `%${selectedRole}%`);
 
-      if (error) {
-        console.error('❌ Supabase fetch error:', error);
+      if (error || !data || data.length === 0) {
         setUsers([]);
-        setFilteredUsers([]);
-        setErrorMsg('Failed to fetch data from Supabase.');
-      } else if (!data || data.length === 0) {
-        setUsers([]);
-        setFilteredUsers([]);
-        setErrorMsg('No records found for this role.');
+        setErrorMsg('No records found or fetch error.');
       } else {
-        console.log(`✅ ${data.length} users fetched for category: ${trimmedRole}`);
         setUsers(data);
-        setFilteredUsers(data);
         setErrorMsg('');
       }
 
@@ -163,28 +60,109 @@ const Dashboard = ({ onLogout }) => {
   }, [selectedRole]);
 
   useEffect(() => {
-    const filtered = users.filter((user) =>
-      user.full_name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredUsers(filtered);
-  }, [searchTerm, users]);
+    if (selectedRole !== 'Control') return;
 
-  const handleLogout = () => {
-    onLogout();
-    navigate('/admin', { replace: true });
+    const fetchStatus = async () => {
+      const { data } = await supabase.from('audition_section_status').select('*');
+      if (data) setSectionStatus(data);
+    };
+
+    fetchStatus();
+  }, [selectedRole]);
+
+  
+const toggleFormStatus = async () => {
+  const newStatus = !formOpen;
+
+  const { error: formError } = await supabase
+    .from('audition_form_status')
+    .update({ is_open: newStatus })
+    .eq('id', 1);
+
+  if (formError) return;
+
+  setFormOpen(newStatus);
+
+  
+  if (newStatus) {
+    const { data: sections } = await supabase.from('audition_section_status').select('*');
+    if (sections) {
+      const updates = sections.map(section =>
+        supabase
+          .from('audition_section_status')
+          .update({ is_open: true })
+          .eq('id', section.id)
+      );
+      await Promise.all(updates);
+      setSectionStatus(sections.map(section => ({ ...section, is_open: true })));
+    }
+  }
+};
+
+  const toggleSectionVisibility = async (id, currentStatus) => {
+    const { error } = await supabase
+      .from('audition_section_status')
+      .update({ is_open: !currentStatus })
+      .eq('id', id);
+
+    if (!error) {
+      setSectionStatus(prev =>
+        prev.map(section =>
+          section.id === id ? { ...section, is_open: !currentStatus } : section
+        )
+      );
+    }
   };
 
-  const goToHome = () => {
-    window.location.href = '/#home';
+  // 
+  useEffect(() => {
+  const channel = supabase.channel('realtime-toggle-listener');
+
+  channel.on(
+    'postgres_changes',
+    {
+      event: 'UPDATE',
+      schema: 'public',
+      table: 'audition_form_status',
+    },
+    (payload) => {
+      setFormOpen(payload.new.is_open);
+    }
+  );
+
+ 
+  channel.on(
+    'postgres_changes',
+    {
+      event: 'UPDATE',
+      schema: 'public',
+      table: 'audition_section_status',
+    },
+    (payload) => {
+      setSectionStatus((prev) =>
+        prev.map((section) =>
+          section.id === payload.new.id ? payload.new : section
+        )
+      );
+    }
+  );
+
+  channel.subscribe();
+
+ 
+  return () => {
+    channel.unsubscribe();
   };
+}, []);
+
 
   return (
     <div className={styles.appContainer}>
       <div className={styles.appHeader}>
         <span>AVR Dashboard</span>
         <div className={styles.headerButtons}>
-          <button className={styles.headerButton} onClick={handleLogout}>Logout</button>
-          <button className={styles.headerButton} onClick={goToHome}>Home</button>
+          <button onClick={onLogout}>Logout</button>
+          <button onClick={() => window.location.href = '/#home'}>Home</button>
         </div>
       </div>
 
@@ -192,41 +170,39 @@ const Dashboard = ({ onLogout }) => {
         <div className={styles.sidebar}>
           <Sidebar onRoleSelect={setSelectedRole} selectedRole={selectedRole} />
         </div>
+
         <div className={styles.content}>
-          {selectedRole === 'Home' ? (
-            <div className={styles.welcomeMessage}>
-              <h1>Hello, Welcome Back</h1>
-              <h1>
-                MR <span className={styles.highlight}>A.VEERA RAGAVAN</span>
-              </h1>
+          {selectedRole === 'Control' ? (
+            <ControlPanel 
+              sectionStatus={sectionStatus} 
+              toggleSectionVisibility={toggleSectionVisibility} 
+               formOpen={formOpen}
+            />
+          ) : selectedRole === 'Home' ? (
+            <div className={styles.toggleContainer}>
+              <p><strong>{submissionCount} / 24,000 Submissions</strong></p>
+              <label className={styles.toggleSwitchLabel}>
+                {formOpen ? '🟢 Audition Form Open' : '🔴 Audition Form Closed'}
+                <div
+                  className={`${styles.toggleSwitch} ${formOpen ? styles.on : ''}`}
+                  onClick={toggleFormStatus}
+                />
+              </label>
+              <div className={styles.welcomeMessage}>
+                <h1>Hello, Welcome Back</h1>
+                <h1>MR <span className={styles.highlight}>A.VEERA RAGAVAN</span></h1>
+              </div>
             </div>
           ) : selectedUser ? (
             <UserDetail user={selectedUser} onBack={() => setSelectedUser(null)} />
           ) : errorMsg ? (
             <div className={styles.errorDisplay}>{errorMsg}</div>
           ) : (
-            <>
-              {/* ✅ Search Bar */}
-              <div className={styles.searchContainer}>
-                <input
-                type="text"
-               placeholder="Search by name..."
-              value={searchTerm}
-             onChange={(e) => setSearchTerm(e.target.value)}
-              className={styles.searchInput}
-                />
-             <button className={styles.searchButton}>
-  <img src="/images/search.png" alt="Search" className={styles.searchIcon} />
-</button>
+            <div className={styles.userList}>
+              {users.map(user => (
+                <UserCard key={user.id} user={user} onSelect={setSelectedUser} />
+              ))}
             </div>
-
-
-              <div className={styles.userList}>
-                {filteredUsers.map((user) => (
-                  <UserCard key={user.id} user={user} onSelect={setSelectedUser} />
-                ))}
-              </div>
-            </>
           )}
         </div>
       </div>
@@ -235,4 +211,3 @@ const Dashboard = ({ onLogout }) => {
 };
 
 export default Dashboard;
-
