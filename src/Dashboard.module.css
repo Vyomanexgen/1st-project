@@ -221,7 +221,7 @@ h1 {
 
 .userList{
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cards per row on large screens */
+  grid-template-columns: repeat(4, 1fr); 
   gap: 20px;
   padding: 20px;
   justify-items: center;
@@ -424,11 +424,11 @@ h1 {
 }
 
 .headerButtons button:hover {
-  background-color: #00e5ff; /* Green hover */
+  background-color: #00e5ff;
   transform: scale(1.05);
   color: black;
 }
 
 .headerButtons button:nth-child(2):hover {
-  background-color:#00e5ff; /* Blue hover for Home */
+  background-color:#00e5ff; 
 }
