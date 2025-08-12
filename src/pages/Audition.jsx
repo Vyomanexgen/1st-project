@@ -344,6 +344,7 @@ const handleSubmit = async (e) => {
                 
                 <div className={styles.cardBack}>
                   <h2>Sign In</h2>
+                  <p>If You are a new user please click on the below <strong>SignUp</strong> Link</p>
                   <form onSubmit={handleSignIn} className={styles.authForm}>
                     <input name="email" type="email" placeholder="Email" required />
                     <div className={styles.passwordWrapper}>
