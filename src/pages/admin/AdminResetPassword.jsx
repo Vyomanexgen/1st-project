@@ -40,7 +40,7 @@ const AdminResetPassword = () => {
     const { error } = await supabase.auth.resetPasswordForEmail(
       "veeraraghavan067@gmail.com",
       {
-     //   redirectTo: "http://localhost:3000/admin-update-password",
+      //  redirectTo: "http://localhost:3000/admin-update-password",
      redirectTo: "https://avrcreations.vercel.app/admin-update-password",
 
       }
