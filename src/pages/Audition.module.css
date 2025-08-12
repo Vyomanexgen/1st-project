@@ -373,6 +373,7 @@ label {
   width: 100%;
   transition: transform 0.3s ease-in-out;
   transform-style: preserve-3d;
+  
 }
 
 .flip .cardInner {
@@ -384,11 +385,11 @@ label {
   position: absolute;
   width: 100%;
   backface-visibility: hidden;
-  background: rgba(20, 20, 30, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1d1c2a;
+  
   border-radius: 16px;
   padding: 28px 24px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+  
   color: white;
   box-sizing: border-box;
   display: flex;
@@ -403,6 +404,21 @@ label {
   transform: rotateY(180deg);
 }
 
+.cardBack p {
+color: #fff;
+font-size: 15px;
+}
+
+
+.cardFront h2{
+  color: white;
+  font-size: 30px;
+}
+
+.cardBack h2{
+  color: white;
+  font-size: 30px;
+}
 /* Auth Form Styling */
 .authForm {
   display: flex;
@@ -554,116 +570,18 @@ label {
     font-size: 14px;
   }
 }
-@media (max-width: 390px) {
+
+@media (max-width: 400px) {
   .authContainer {
-    padding: 12px;
+    padding: 20px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    width: 100%;
-  }
-  .cardWrapper {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 1px 12px rgba(0,0,0,0.12);
-  }
-  .cardFront, .cardBack {
-    padding: 14px 10px;
-    border-radius: 8px;
-    font-size: 15px;
-  }
-  .authForm input {
-    font-size: 15px;
-    padding: 10px;
-    margin-bottom: 8px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .passwordWrapper input {
-    padding: 10px 36px 10px 10px;
-  }
-  .eyeIcon {
-    width: 22px;
-    height: 22px;
-    right: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .authForm button {
-    font-size: 15px;
-    padding: 10px;
-    border-radius: 6px;
-  }
-  .toggleText {
-    margin-top: 14px;
-    font-size: 13px;
-  }
-}
-@media (max-width: 390px) {
-  .authContainer {
-    padding: 12px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 100%;
-  }
-  .cardWrapper {
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 1px 12px rgba(0,0,0,0.12);
-  }
-  .cardFront, .cardBack {
-    padding: 14px 10px;
-    border-radius: 8px;
-    font-size: 15px;
-  }
-  .authForm input {
-    font-size: 15px;
-    padding: 10px;
-    margin-bottom: 8px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .passwordWrapper input {
-    padding: 10px 36px 10px 10px;
-  }
-  .eyeIcon {
-    width: 22px;
-    height: 22px;
-    right: 6px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .authForm button {
-    font-size: 15px;
-    padding: 10px;
-    border-radius: 6px;
-  }
-  .toggleText {
-    margin-top: 14px;
-    font-size: 13px;
-  }
-}
-@media (max-width: 390px) {
-  .authContainer {
-    padding: 12px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    width: 100%;
+   width: 100vw;
+   margin-left: -70px;
   }
   .cardWrapper {
     max-width: 380px; 
@@ -701,9 +619,11 @@ label {
   }
   .toggleText {
     margin-top: 14px;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 600;
   }
-}
+} 
+
 
 @media (min-width: 1200px) {
   .auditionGrid {
