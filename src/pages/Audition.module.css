@@ -4,7 +4,7 @@
   font-family: var(--font-base);
 }
 .auditionHeading {
-  font-size: 39px; /* smaller size */
+  font-size: 39px; 
   text-align: center;
   color: #ffffffcc;
   margin-top: 20px;
@@ -116,6 +116,7 @@
   color: var(--color-text-light);
 }
 
+
 form {
   display: flex;
   flex-direction: column;
@@ -151,6 +152,7 @@ legend {
   font-family: var(--font-base);
   color: var(--color-text-light);
 }
+
 
 .modalForm input[type="file"] {
   width: 100%;
@@ -215,6 +217,21 @@ label {
   }
 }
 
+.closedBadge{
+  display: inline-block;
+  background-color: #ff1e3e;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 16px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 30, 62, 0.15);
+  animation: pulseWarning 1.8s infinite;
+
+}
 .thankYouModal {
   position: fixed;
   top: 0;
@@ -309,8 +326,7 @@ label {
     box-shadow: 0 0 0 rgba(255, 0, 0, 0.4);
   }
 }
-
-.authContainer {
+ .authContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -331,10 +347,35 @@ label {
 .passwordWrapper {
   position: relative;
 }
+.passwordWrapper input{
+  font-size: 24px;
+  padding: 28px 56px 24px 22px;
+  width: 340px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .passwordWrapper input {
+    width: 100%;
+    font-size: 18px;
+    padding: 18px 44px 16px 14px;
+  }
+}
+.helperText {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.helperText strong {
+  color: #fff; /* make 'Sign Up' stand out */
+}
+
 
 .eyeIcon {
   position: absolute;
-  right: 30px;
+  right: 8px; 
   top: 40%;
   transform: translateY(-50%);
   width: 25px;
@@ -392,7 +433,7 @@ label {
 }
 
 .authForm input {
-  padding: 12px 14px;
+ padding: 14px 40px 14px 14px;
   margin-bottom: 14px;
   border: none;
   border-radius: 10px;
@@ -400,6 +441,7 @@ label {
   color: #fff;
   font-size: 15px;
   transition: 0.3s;
+  
 }
 
 .authForm input::placeholder {
@@ -460,6 +502,46 @@ label {
   transform-origin: left;
 }
 
+.forgotPassword {
+  margin-top: 12px;
+  text-align: right;
+}
+
+.forgotPassword a {
+  color: #e63946;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.forgotPassword a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background-color: #e63946; /* underline in red */
+  transition: width 0.3s ease;
+}
+
+.forgotPassword a:hover::after {
+  width: 100%;
+}
+
+.forgotPassword a:hover {
+  color: #c71f33;
+}
+.forgotPassword a:focus {
+  outline: none;
+  color: #c71f33;
+  outline: none;
+ 
+}
+
 /* Responsive Design */
 @media (max-width: 480px) {
   .authContainer {
@@ -516,7 +598,7 @@ label {
   .toggleText {
     font-size: 12px;
   }
-}
+} 
 
 
 .header {
@@ -670,14 +752,7 @@ label {
 }
 
 
-.authContainer {
-  perspective: 1000px;
-  height: 400px;
-  width: 340px;
-  margin: 60px auto;
-  position: relative;
-}
-
+ 
 .cardWrapper {
   width: 100%;
   max-width: 380px;
@@ -756,13 +831,6 @@ label {
   background-color: var(--color-accent-hover);
 }
 
-.forgotPassword {
-  font-size: 12px;
-  text-align: right;
-  text-decoration: underline;
-  color: var(--color-accent);
-  cursor: pointer;
-}
 
 .switchText {
   font-size: 14px;
@@ -823,8 +891,7 @@ label {
   .auditionGrid {
     grid-template-columns: 1fr;
   }
-}
-
+} 
 .noRoles {
   color: #d9534f;
   text-align: center;
@@ -835,7 +902,7 @@ label {
 
 .closedBanner {
   background-color: #fff3cd;
-  color: #856404;
+  color: #850404;
   border: 1px solid #ffeeba;
   padding: 16px;
   margin: 20px auto;
@@ -846,3 +913,5 @@ label {
   font-weight: 500;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
+/*   background: linear-gradient(135deg, #6a11cb, #2575fc); */
+

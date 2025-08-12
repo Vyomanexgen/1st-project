@@ -89,6 +89,7 @@ const UserDetail = ({ user, onBack }) => {
           <p><strong>Languages:</strong> {user.language_spoken}</p>
           <p><strong>Availability:</strong> {user.availability}</p>
           <p><strong>Social Links:</strong> {user.social_links}</p>
+           <p><strong>Social Links:</strong> {user.social_links2}</p>
             </div>
           </div>
 
