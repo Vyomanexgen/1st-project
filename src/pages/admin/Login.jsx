@@ -3,28 +3,38 @@ import eyeOpen from './images/eye.png';
 import eyeOff from './images/eye-close.png';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css'; 
+import supabase from '../../config/supabaseClient';
+
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-  
-   if (username === 'veeraraghavan' && password === 'V3r@G8') {
-      setError('');
-      console.log("Login successful! Calling onLogin()...");
-      onLogin(); 
-      console.log("Navigating to /dashboard...");
-      navigate('/dashboard'); 
-    } else {
+    const { data, error: queryError } = await supabase
+      .from('admin_credentials')
+      .select('*')
+      .eq('username', username)
+      .eq('password', password)
+      .single();
+
+    if (queryError || !data) {
       setError('Invalid username or password');
       console.log("Login failed: Invalid credentials.");
+      return;
     }
+
+    setError('');
+    console.log("Login successful! Calling onLogin()...");
+    onLogin(); 
+    console.log("Navigating to /dashboard...");
+    localStorage.setItem('isAdmin', true); // optional: protect routes
+    navigate('/dashboard');
   };
 
   return (
@@ -55,6 +65,7 @@ const Login = ({ onLogin }) => {
               required
               autoComplete="current-password"
               className={`${styles.loginInput} ${styles.passwordInput}`}
+              
             />
             <button
               type="button"
@@ -67,9 +78,8 @@ const Login = ({ onLogin }) => {
                 src={showPassword ? eyeOpen : eyeOff}
                 alt={showPassword ? 'Hide password' : 'Show password'}
                 style={{ width: '28px', height: '28px', pointerEvents: 'none', marginTop:'-50px', userSelect: 'none',
-    transition: 'none',
-    filter: 'none' }}
-
+                  transition: 'none',
+                  filter: 'none' }}
               />
             </button>
           </div>
@@ -82,7 +92,9 @@ const Login = ({ onLogin }) => {
             />
             Remember me
           </label>
-
+          <p className={styles.forgotpassword}>
+            <a href="/admin-forgot-password" target="_blank" rel="noopener noreferrer">Forgot Password</a>
+          </p>
           <button type="submit" className={styles.loginBtn}>Sign In</button>
         </form>
       </div>

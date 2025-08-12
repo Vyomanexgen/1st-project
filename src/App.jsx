@@ -12,6 +12,10 @@ import Login from './pages/admin/Login';
 import Dashboard from './Dashboard';
 import Audition from './pages/Audition';
 import './Global.css';
+import ResetPassword from './pages/ResetPassword';
+import UpdatePassword from './pages/UpdatePassword';
+import AdminResetPassword from './pages/admin/AdminResetPassword';
+import AdminUpdatePassword from './pages/admin/AdminUpdatePassword';
 
 function MainSite() {
   return (
@@ -45,7 +49,10 @@ const App = () => {
         <Route path="/" element={<MainSite />} />
         <Route path="/audition" element={<Audition />} />
 
-       
+        <Route path="/reset-password" element={<ResetPassword />} />
+   <Route path="/update-password" element={<UpdatePassword />} />
+   <Route path="/admin-forgot-password" element={< AdminResetPassword />} /> 
+   <Route path="/admin-update-password" element={<AdminUpdatePassword />} />
         <Route
           path="/admin"
           element={

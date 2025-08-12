@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './pages/admin/Sidebar';
 import UserCard from './pages/admin/UserCard';
 import UserDetail from './pages/admin/UserDetail';
-import styles from './Dashboard.module.css'; 
+import styles from './Dashboard.module.css';
 import { useNavigate } from 'react-router-dom';
 import supabase from './config/supabaseClient';
 import ControlPanel from './pages/admin/ControlPanel';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Dashboard = ({ onLogout }) => {
   const [selectedRole, setSelectedRole] = useState('Home');
@@ -15,7 +17,7 @@ const Dashboard = ({ onLogout }) => {
   const [submissionCount, setSubmissionCount] = useState(0);
   const [formOpen, setFormOpen] = useState(true);
   const [sectionStatus, setSectionStatus] = useState([]);
-  
+  const [searchTerm, setSearchTerm] = useState('');
 
   const navigate = useNavigate();
 
@@ -40,10 +42,16 @@ const Dashboard = ({ onLogout }) => {
     if (selectedRole === 'Home' || selectedRole === 'Control') return;
 
     const fetchUsers = async () => {
-      const { data, error } = await supabase
+      let query = supabase
         .from('Audition Form')
         .select('*')
         .ilike('Categories', `%${selectedRole}%`);
+
+      if (searchTerm.trim()) {
+        query = query.ilike('full_name', `%${searchTerm}%`);
+      }
+
+      const { data, error } = await query;
 
       if (error || !data || data.length === 0) {
         setUsers([]);
@@ -57,7 +65,7 @@ const Dashboard = ({ onLogout }) => {
     };
 
     fetchUsers();
-  }, [selectedRole]);
+  }, [selectedRole, searchTerm]);
 
   useEffect(() => {
     if (selectedRole !== 'Control') return;
@@ -70,34 +78,32 @@ const Dashboard = ({ onLogout }) => {
     fetchStatus();
   }, [selectedRole]);
 
-  
-const toggleFormStatus = async () => {
-  const newStatus = !formOpen;
+  const toggleFormStatus = async () => {
+    const newStatus = !formOpen;
 
-  const { error: formError } = await supabase
-    .from('audition_form_status')
-    .update({ is_open: newStatus })
-    .eq('id', 1);
+    const { error: formError } = await supabase
+      .from('audition_form_status')
+      .update({ is_open: newStatus })
+      .eq('id', 1);
 
-  if (formError) return;
+    if (formError) return;
 
-  setFormOpen(newStatus);
+    setFormOpen(newStatus);
 
-  
-  if (newStatus) {
-    const { data: sections } = await supabase.from('audition_section_status').select('*');
-    if (sections) {
-      const updates = sections.map(section =>
-        supabase
-          .from('audition_section_status')
-          .update({ is_open: true })
-          .eq('id', section.id)
-      );
-      await Promise.all(updates);
-      setSectionStatus(sections.map(section => ({ ...section, is_open: true })));
+    if (newStatus) {
+      const { data: sections } = await supabase.from('audition_section_status').select('*');
+      if (sections) {
+        const updates = sections.map(section =>
+          supabase
+            .from('audition_section_status')
+            .update({ is_open: true })
+            .eq('id', section.id)
+        );
+        await Promise.all(updates);
+        setSectionStatus(sections.map(section => ({ ...section, is_open: true })));
+      }
     }
-  }
-};
+  };
 
   const toggleSectionVisibility = async (id, currentStatus) => {
     const { error } = await supabase
@@ -114,47 +120,48 @@ const toggleFormStatus = async () => {
     }
   };
 
-  // 
-  useEffect(() => {
-  const channel = supabase.channel('realtime-toggle-listener');
+  const handleDeleteUser = async (userId) => {
+    if (!window.confirm('Are you sure you want to delete this user?')) return;
 
-  channel.on(
-    'postgres_changes',
-    {
-      event: 'UPDATE',
-      schema: 'public',
-      table: 'audition_form_status',
-    },
-    (payload) => {
-      setFormOpen(payload.new.is_open);
+    const { error } = await supabase
+      .from('Audition Form')
+      .delete()
+      .eq('id', userId);
+
+    if (error) {
+      toast.error('❌ Failed to delete user');
+    } else {
+      toast.success('✅ User deleted successfully');
+      setUsers(prev => prev.filter(user => user.id !== userId));
     }
-  );
-
- 
-  channel.on(
-    'postgres_changes',
-    {
-      event: 'UPDATE',
-      schema: 'public',
-      table: 'audition_section_status',
-    },
-    (payload) => {
-      setSectionStatus((prev) =>
-        prev.map((section) =>
-          section.id === payload.new.id ? payload.new : section
-        )
-      );
-    }
-  );
-
-  channel.subscribe();
-
- 
-  return () => {
-    channel.unsubscribe();
   };
-}, []);
 
+
+
+  useEffect(() => {
+    const channel = supabase.channel('realtime-toggle-listener');
+
+    channel.on(
+      'postgres_changes',
+      { event: 'UPDATE', schema: 'public', table: 'audition_form_status' },
+      (payload) => setFormOpen(payload.new.is_open)
+    );
+
+    channel.on(
+      'postgres_changes',
+      { event: 'UPDATE', schema: 'public', table: 'audition_section_status' },
+      (payload) => {
+        setSectionStatus((prev) =>
+          prev.map((section) =>
+            section.id === payload.new.id ? payload.new : section
+          )
+        );
+      }
+    );
+
+    channel.subscribe();
+    return () => channel.unsubscribe();
+  }, []);
 
   return (
     <div className={styles.appContainer}>
@@ -176,7 +183,7 @@ const toggleFormStatus = async () => {
             <ControlPanel 
               sectionStatus={sectionStatus} 
               toggleSectionVisibility={toggleSectionVisibility} 
-               formOpen={formOpen}
+              formOpen={formOpen}
             />
           ) : selectedRole === 'Home' ? (
             <div className={styles.toggleContainer}>
@@ -198,11 +205,26 @@ const toggleFormStatus = async () => {
           ) : errorMsg ? (
             <div className={styles.errorDisplay}>{errorMsg}</div>
           ) : (
-            <div className={styles.userList}>
-              {users.map(user => (
-                <UserCard key={user.id} user={user} onSelect={setSelectedUser} />
-              ))}
-            </div>
+            <>
+              <input
+                type="text"
+                placeholder="Search by name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className={styles.searchInput}
+              />
+
+              <div className={styles.userList}>
+                {users.map(user => (
+                  <UserCard 
+                    key={user.id} 
+                    user={user} 
+                    onSelect={setSelectedUser} 
+                    onDelete={handleDeleteUser}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -211,3 +233,4 @@ const toggleFormStatus = async () => {
 };
 
 export default Dashboard;
+
