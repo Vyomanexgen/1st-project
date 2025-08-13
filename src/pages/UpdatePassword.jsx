@@ -32,7 +32,7 @@ function UpdatePassword() {
 
     setIsSubmitting(true);
 
-    const { data, error } = await supabase.auth.updateUser({
+    const { error } = await supabase.auth.updateUser({
       password: newPassword,
     });
 

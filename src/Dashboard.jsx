@@ -3,7 +3,7 @@ import Sidebar from './pages/admin/Sidebar';
 import UserCard from './pages/admin/UserCard';
 import UserDetail from './pages/admin/UserDetail';
 import styles from './Dashboard.module.css';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import supabase from './config/supabaseClient';
 import ControlPanel from './pages/admin/ControlPanel';
 import { toast } from 'react-toastify';
@@ -19,7 +19,7 @@ const Dashboard = ({ onLogout }) => {
   const [sectionStatus, setSectionStatus] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSubmissionData = async () => {
