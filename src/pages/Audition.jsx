@@ -459,7 +459,6 @@ const handleSubmit = async (e) => {
                   <input type="file" name="head_shot_photo" onChange={handleFileChange} required/>
                   <label>Upload Full Body Photo:</label>
                   <input type="file" name="full_body_photo" onChange={handleFileChange} required />
-
                 </fieldset>
                 
                 <fieldset>
@@ -476,14 +475,13 @@ const handleSubmit = async (e) => {
                       color: "red",
                       fontWeight: "600",
                       display: "block",
-                      textAlign: "center",
-                      paddingBottom: "8px"
+                      textAlign: "center"
                     }}
                   >
                     * Application fee is ₹100. Pay using the above QR code.
                   </small>
-                  <label>Payment Screenshot:</label>
                   <br />
+                  <label>Upload Payment Screenshot</label>
                   <input
                   type="file"
                   name="payment_screenshot"
@@ -491,9 +489,11 @@ const handleSubmit = async (e) => {
                   required
                 />
                 <br />
-                <small style={{ color: "red", fontWeight: "600", display: "block", marginTop: "4px", marginBottom: "0px" }}>
+                <small style={{ color: "red", fontWeight: "600", display: "block", marginTop: "4px", marginBottom: "12px" }}>
                   * Providing fake or altered screenshots may lead to application rejection. Ensure the image clearly displays the transaction ID.
                 </small>
+                <legend>Enter Transaction ID</legend>
+                <input name="Transaction ID" type="text" onChange={handleInputChange} placeholder="Transaction ID" required />
                 </fieldset>
 
                 <div className={styles.termsSection}>
@@ -617,7 +617,7 @@ after such changes indicates your acceptance.
   If you have any queries regarding refunds or require assistance, please contact us at:
 </p>
 <p style={{fontSize:"15px",fontWeight:"800"}}>Email:  <a href="support@directoravr.com" style={{ color: "red" }}>
-          support@directoravr.com
+          avrcinemas7@gmail.com
         </a> <br />
 Region: Tamil Nadu, India</p>
 
