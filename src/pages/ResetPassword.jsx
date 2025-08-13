@@ -18,7 +18,8 @@ function ResetPassword() {
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
      //  redirectTo: "http://localhost:3000/update-password",
-      redirectTo: "https://avrcreations.vercel.app/update-password",
+   //   redirectTo: "https://avrcreations.vercel.app/update-password",
+       redirectTo: "https://directoravr.com/update-password",
     });
 
     setIsSubmitting(false);
@@ -26,7 +27,7 @@ function ResetPassword() {
     if (error) {
       toast.error("Something went wrong: " + error.message);
       console.error("Reset error:", error);
-    } else {
+    } else {       
       
       toast.success("If this email is registered, a reset link has been sent.");
     }

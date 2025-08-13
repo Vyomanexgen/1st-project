@@ -213,7 +213,7 @@ const handleSubmit = async (e) => {
   const resumeUrl = await uploadToStorage(files.resume, "resumes");
   const headshotUrl = await uploadToStorage(files.head_shot_photo, "headshots");
   const fullBodyUrl = await uploadToStorage(files.full_body_photo, "fullbodies");
-
+  const paymentScreenshotUrl = await uploadToStorage(files.payment_screenshot, "payments");
  
   if (files.full_body_photo && !fullBodyUrl) {
       toast.error("❌ Critical error: Failed to upload the full body photo. Please check your connection and try again.");
@@ -302,6 +302,7 @@ const handleSubmit = async (e) => {
       head_shot_photo: headshotUrl,
       full_body_photo: fullBodyUrl,
       unique_id: uniqueID,
+      payment_screenshot: paymentScreenshotUrl,
     },
   ]);
 
@@ -461,11 +462,20 @@ const handleSubmit = async (e) => {
                   <input type="file" name="full_body_photo" onChange={handleFileChange} required />
 
                 </fieldset>
+                       <fieldset>
+                  <legend>Payment Section</legend>
+                  <label>Payment Screenshot:</label>
+                    <br />
+                  <h5 style={{color:"red",fontWeight:"600"}}>Providing fake or altered screenshots may lead to application rejection. </h5>
+                  <br />
+                  <input type="file" name="payment_screenshot" onChange={handleFileChange} required/>
+                 
+                </fieldset>
 
                 <div className={styles.termsSection}>
                   <div className={styles.termsCheckbox}>
                     <input type="checkbox" checked={agreedToTermsInForm} onChange={(e) => setAgreedToTermsInForm(e.target.checked)} />
-                    <label>I agree to the terms and conditions</label>
+                    <label>Please read our Terms & Conditions before submit</label>
                     <a href="#" onClick={(e) => { e.preventDefault(); setShowTermsPopup(true); }}>View Terms & Conditions</a>
                     
                   </div>
