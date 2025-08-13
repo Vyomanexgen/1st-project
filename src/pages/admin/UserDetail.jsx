@@ -29,6 +29,13 @@ const UserDetail = ({ user, onBack }) => {
     return () => window.removeEventListener('keydown', handleEscape);
   }, [enlargedImage]);
 
+  const getImageTitle = (imagePath) => {
+  if (!imagePath) return "";
+  if (imagePath.includes("head")) return "Head Shot";
+  if (imagePath.includes("full")) return "Full Body";
+  if (imagePath.includes("password")) return "Password Screenshot";
+  return "";
+};
   return (
     <>
       {/* Back button OUTSIDE the card */}
@@ -113,6 +120,15 @@ const UserDetail = ({ user, onBack }) => {
             onClick={() => handleImageClick(user.full_body_photo || DEFAULT_IMAGE)}
           />
             </div>
+             <div className={styles.photoItem}>
+          <p className={styles.photoLabel}>Payment Screenshot</p>
+          <img
+            src={user.payment_screenshot || DEFAULT_IMAGE}
+            alt="Payment Screenshot"
+            className={styles.smallImage}
+            onClick={() => handleImageClick(user.payment_screenshot || DEFAULT_IMAGE)}
+          />
+            </div>
           </div>
         </div>
       {enlargedImage && (
@@ -126,6 +142,10 @@ const UserDetail = ({ user, onBack }) => {
           </div>
         </div>
       )}
+
+ 
+
+
     </>
   );
 };

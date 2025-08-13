@@ -140,6 +140,18 @@ legend {
   color: var(--color-text-light);
 }
 
+.modalForm input[type="date"] {
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none; 
+  color-scheme: dark; 
+}
+
+.modalForm input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7); 
+  cursor: pointer;
+}
+
 .modalForm input[type="file"] {
   width: 100%;
   padding: var(--space-md);
