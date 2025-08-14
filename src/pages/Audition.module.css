@@ -140,7 +140,7 @@ legend {
   color: var(--color-text-light);
 }
 
-.modalForm input[type="date"] {
+/* .modalForm input[type="date"] {
   appearance: none; 
   -webkit-appearance: none;
   -moz-appearance: none; 
@@ -150,7 +150,47 @@ legend {
 .modalForm input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.7); 
   cursor: pointer;
+} */
+
+
+.modalForm input[type="date"] {
+  width: 100%;
+  padding: var(--space-md);
+  padding-right: 40px; /* Extra space for icon */
+  border: 1px solid var(--color-secondary-navbar);
+  border-radius: 6px;
+  margin-top: 5px;
+  font-size: 14px;
+  background-color: var(--color-secondary-bg);
+  font-family: var(--font-base);
+  color: var(--color-text-light);
+
+  /* Custom calendar icon (Base64 SVG) */
+  background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjY2NjIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE5IDNoLTFWMWgtMnYySDhWMUg2djJINWMtMS4xIDAtMiAuOS0yIDJ2MTRjMCAxLjEuOSAyIDIgMmgxNGMxLjEgMCAyLS45IDItMlY1YzAtMS4xLS45LTItMi0yem0wIDE2SDVWOGgxNHYxMXptLTcgM2MtMS42IDAtMy0xLjQtMy0zczEuNC0zIDMtMyAzIDEuNCAzIDMtMS40IDMtMyAzem0wLTdjLTEuNiAwLTMtMS40LTMtM3MxLjQtMyAzLTMgMyAxLjQgMyAzLTEuNCAzLTMgM3oiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+  position: relative;
 }
+
+.modalForm input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0; /* Hide native icon */
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .modalForm input[type="date"] {
+    font-size: 16px; /* Easier tap targets */
+    padding-right: 36px; /* Adjust for icon */
+    background-size: 16px; /* Slightly smaller icon */
+  }
+}
+
 
 .modalForm input[type="file"] {
   width: 100%;
