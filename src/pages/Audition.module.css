@@ -775,3 +775,64 @@ font-size: 15px;
     box-shadow: 0 0 0 rgba(255, 0, 0, 0.4);
   }
 }
+
+.termsSection {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+}
+
+.termsCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0px;
+}
+
+.termsCheckbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.termsLabel {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  cursor: pointer;
+}
+
+.termsLabel a {
+  margin-left: 4px;
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  text-decoration: underline;
+}
+
+.termsLabel a:hover {
+  color: var(--color-hover);
+}
+
+.viewTerms {
+  margin-left: 4px;
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.viewTerms:hover {
+  color: var(--color-hover);
+}
+.paymentImageWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.paymentImage {
+  max-width: 300px;
+  width: 100%;
+}

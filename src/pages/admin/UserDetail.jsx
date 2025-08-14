@@ -29,13 +29,13 @@ const UserDetail = ({ user, onBack }) => {
     return () => window.removeEventListener('keydown', handleEscape);
   }, [enlargedImage]);
 
-  const getImageTitle = (imagePath) => {
+  /*const getImageTitle = (imagePath) => {
   if (!imagePath) return "";
   if (imagePath.includes("head")) return "Head Shot";
   if (imagePath.includes("full")) return "Full Body";
   if (imagePath.includes("password")) return "Password Screenshot";
   return "";
-};
+};*/
   return (
     <>
       {/* Back button OUTSIDE the card */}

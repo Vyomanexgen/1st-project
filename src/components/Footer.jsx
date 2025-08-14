@@ -3,7 +3,7 @@ import './Footer.css';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
-const DiamondBulletIcon = () => (
+/*const DiamondBulletIcon = () => (
   <svg
     className="diamond-bullet"
     width="14"
@@ -20,7 +20,7 @@ const DiamondBulletIcon = () => (
     </defs>
     <path d="M12 2L22 12L12 22L2 12L12 2Z" />
   </svg>
-);
+);*/
 
 const Footer = () => {
   return (

@@ -49,7 +49,7 @@ const Audition = () => {
   const [isFlipped, setIsFlipped] = useState(true);
   const [showSignUpPassword, setShowSignUpPassword] = useState(false);
   const [showSignInPassword, setShowSignInPassword] = useState(false);
-  const [agreedToTermsInPopup, setAgreedToTermsInPopup] = useState(false);
+  //const [agreedToTermsInPopup, setAgreedToTermsInPopup] = useState(false);
 
  
   useEffect(() => {
@@ -443,7 +443,6 @@ const handleSubmit = async (e) => {
                   <input name="availability" type="text" onChange={handleInputChange} placeholder="Availability" />
                 </fieldset>
 
-
                 <fieldset>
                   <legend>Experience & Skills</legend>
                   <label>Upload Resume:</label>
@@ -460,29 +459,71 @@ const handleSubmit = async (e) => {
                   <input type="file" name="head_shot_photo" onChange={handleFileChange} required/>
                   <label>Upload Full Body Photo:</label>
                   <input type="file" name="full_body_photo" onChange={handleFileChange} required />
-
                 </fieldset>
-                       <fieldset>
+                
+                <fieldset>
                   <legend>Payment Section</legend>
-                  <label>Payment Screenshot:</label>
-                    <br />
-                  <h5 style={{color:"red",fontWeight:"600"}}>Providing fake or altered screenshots may lead to application rejection. </h5>
+                  <div className={styles.paymentImageWrapper}>
+                    <img
+                      src="/images/GooglePay_QR.png" // keep your image in public/images
+                      alt="Sample Payment Screenshot"
+                      className={styles.paymentImage}
+                    />
+                  </div>
+                  <small
+                    style={{
+                      color: "red",
+                      fontWeight: "600",
+                      display: "block",
+                      textAlign: "center"
+                    }}
+                  >
+                    * Application fee is ₹100. Pay using the above QR code.
+                  </small>
                   <br />
-                  <input type="file" name="payment_screenshot" onChange={handleFileChange} required/>
-                 
+                  <label>Upload Payment Screenshot</label>
+                  <input
+                  type="file"
+                  name="payment_screenshot"
+                  onChange={handleFileChange}
+                  required
+                />
+                <br />
+                <small style={{ color: "red", fontWeight: "600", display: "block", marginTop: "4px", marginBottom: "12px" }}>
+                  * Providing fake or altered screenshots may lead to application rejection. Ensure the image clearly displays the transaction ID.
+                </small>
+                <legend>Enter Transaction ID</legend>
+                <input name="Transaction ID" type="text" onChange={handleInputChange} placeholder="Transaction ID" required />
                 </fieldset>
 
                 <div className={styles.termsSection}>
-                  <div className={styles.termsCheckbox}>
-                    <input type="checkbox" checked={agreedToTermsInForm} onChange={(e) => setAgreedToTermsInForm(e.target.checked)} />
-                    <label>Please read our Terms & Conditions before submit</label>
-                    <a href="#" onClick={(e) => { e.preventDefault(); setShowTermsPopup(true); }}>View Terms & Conditions</a>
-                    
-                  </div>
+                <div className={styles.termsCheckbox}>
+                  <input
+                    type="checkbox"
+                    checked={agreedToTermsInForm}
+                    onChange={(e) => {
+                      setAgreedToTermsInForm(e.target.checked);
+                      if (e.target.checked) {
+                        setShowTermsPopup(true);
+                      }
+                    }}
+                  />
+                  <label className={styles.termsLabel}>
+                    I agree to Terms & Conditions.
+                    <button
+                      type="button"
+                      className={styles.viewTerms}
+                      onClick={() => setShowTermsPopup(true)}
+                    >
+                      View Terms & Conditions
+                    </button>
+                  </label>
                 </div>
-                <button type="submit" disabled={isSubmitting || !agreedToTermsInForm}>
-                  {isSubmitting ? "Submitting..." : "Submit Application"}
-                </button>
+              </div>
+
+              <button type="submit" disabled={isSubmitting || !agreedToTermsInForm}>
+                {isSubmitting ? "Submitting..." : "Submit Application"}
+              </button>
               </form>
             </div>
           </div>
@@ -576,23 +617,12 @@ after such changes indicates your acceptance.
   If you have any queries regarding refunds or require assistance, please contact us at:
 </p>
 <p style={{fontSize:"15px",fontWeight:"800"}}>Email:  <a href="support@directoravr.com" style={{ color: "red" }}>
-          support@directoravr.com
+          avrcinemas7@gmail.com
         </a> <br />
 Region: Tamil Nadu, India</p>
 
 <p style={{ textAlign: "justify",fontWeight:"800" }}>All refund requests will be reviewed and processed in accordance with our refund policy. Updates
 regarding your request will be communicated via email.</p>
-      {/* New Checkbox inside popup */}
-      <div style={{ marginTop: "35px" ,marginBottom:"28px"}}>
-        <label>
-          <input
-            type="checkbox"
-            checked={agreedToTermsInPopup}
-            onChange={(e) => setAgreedToTermsInPopup(e.target.checked)}
-          />{" "}
-          I have read and agree to these Terms & Conditions
-        </label>
-      </div>
 
       <button onClick={() => setShowTermsPopup(false)} style={{ marginTop: "35px" ,marginBottom:"25px"}}>Close</button>
     </div>
