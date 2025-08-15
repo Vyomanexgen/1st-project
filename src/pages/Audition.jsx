@@ -419,6 +419,7 @@ const handleSubmit = async (e) => {
                 <fieldset>
                   <legend>Personal Information</legend>
                   <input name="full_name" type="text" onChange={handleInputChange} placeholder="Full Name" required />
+                   <p style={{ fontSize: "15px",marginTop:"15px" }}>Date_of_Birth:</p>
                   <input type="date"   placeholder="dd-mm-yyyy" name="date_of_birth" onChange={handleInputChange} required />
                    <input name="gender" type="text" onChange={handleInputChange} placeholder="Gender / Pronouns" />
                     <input name="nationality" type="text" onChange={handleInputChange} placeholder="Nationality" />
