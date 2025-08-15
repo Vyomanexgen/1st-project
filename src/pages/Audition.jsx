@@ -419,7 +419,7 @@ const handleSubmit = async (e) => {
                 <fieldset>
                   <legend>Personal Information</legend>
                   <input name="full_name" type="text" onChange={handleInputChange} placeholder="Full Name" required />
-                  <input type="date" name="date_of_birth" onChange={handleInputChange} required />
+                  <input type="date"   placeholder="dd-mm-yyyy" name="date_of_birth" onChange={handleInputChange} required />
                    <input name="gender" type="text" onChange={handleInputChange} placeholder="Gender / Pronouns" />
                     <input name="nationality" type="text" onChange={handleInputChange} placeholder="Nationality" />
                   <input name="address" type="text" onChange={handleInputChange} placeholder="Address" />
