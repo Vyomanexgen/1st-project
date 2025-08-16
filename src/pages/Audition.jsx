@@ -303,6 +303,7 @@ const handleSubmit = async (e) => {
       full_body_photo: fullBodyUrl,
       unique_id: uniqueID,
       payment_screenshot: paymentScreenshotUrl,
+      Transaction_ID: formData.Transaction_ID,
     },
   ]);
 
@@ -494,7 +495,7 @@ const handleSubmit = async (e) => {
                   * Providing fake or altered screenshots may lead to application rejection. Ensure the image clearly displays the transaction ID.
                 </small>
                 <legend>Enter Transaction ID</legend>
-                <input name="Transaction ID" type="text" onChange={handleInputChange} placeholder="Transaction ID" required />
+                <input name="Transaction_ID" type="text" onChange={handleInputChange} placeholder="Transaction ID" required />
                 </fieldset>
 
                 <div className={styles.termsSection}>
